@@ -1,0 +1,28 @@
+name: Build NestJS App on Push
+
+on:
+  push:
+    branches:
+      - '**' # for every branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 14.x, 16.x, 18.x ]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build project
+        run: yarn build
+
+      - name: Check lint
+        run: yarn lint

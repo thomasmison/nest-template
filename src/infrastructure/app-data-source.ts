@@ -1,4 +1,5 @@
 import { join } from 'path';
+
 import { DataSource } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
