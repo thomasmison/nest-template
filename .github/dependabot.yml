@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: "npm" # your package ecosystem
+    directory: "/" # the directory containing a package.json
+    schedule:
+      interval: "daily" # check for updates daily
+
+  # You can specify more updates for other package ecosystems
+  # and different directories within your project
+  # - package-ecosystem: "npm"
+  #   directory: "/sub-directory"
+  #   schedule:
+  #     interval: "daily"
+
