@@ -74,9 +74,10 @@ Nest is [MIT licensed](LICENSE).
 
 # TODO
 
-- [ ] Add E2E test
+- [x] Add E2E test
 - [ ] Add unit
 - [x] Add swagger
 - [ ] Add authentication process
   - [ ] Add Role based authentication
 - [ ] Add CI using github actions
+- [x] Add Fixtures

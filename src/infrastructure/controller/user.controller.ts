@@ -65,7 +65,7 @@ export class UserController {
 
       return res.status(HttpStatus.OK).json({
         statusCode: HttpStatus.OK,
-        data: users,
+        ...users,
       });
     } catch (error) {
       return res.status(HttpStatus.BAD_REQUEST).json({

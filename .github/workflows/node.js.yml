@@ -6,13 +6,14 @@ on:
       - '**' # for every branch
 
 jobs:
-  build:
+  CI:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [ 14.x, 16.x, 18.x ]
+        node-version: [ 16, 18, 20 ]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    container: node:${{ matrix.node-version }}
 
     steps:
       - name: Checkout
@@ -26,3 +27,40 @@ jobs:
 
       - name: Check lint
         run: yarn lint
+
+      - name: Load fixtures
+        run: yarn db:clear-load
+        env:
+          PG_HOST: postgres
+          PG_PORT: 5432
+          PG_USERNAME: postgres
+          PG_PASSWORD: postgres
+          PG_DATABASE: postgres
+
+
+      - name: Run tests
+        run: yarn test:e2e
+        env:
+          PG_HOST: postgres
+          PG_PORT: 5432
+          PG_USERNAME: postgres
+          PG_PASSWORD: postgres
+          PG_DATABASE: postgres
+
+
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+

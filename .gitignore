@@ -44,3 +44,4 @@ lerna-debug.log*
 !.yarn/cache
 
 .env
+.env.test
