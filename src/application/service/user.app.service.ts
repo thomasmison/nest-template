@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { UserRepository } from '../../infrastructure/repository/user.repository';
-import { UserService } from '../../domain/service/user.service';
+
 import { User } from '../../domain/entity/user.entity';
+import { UserService } from '../../domain/service/user.service';
+import { UserRepository } from '../../infrastructure/repository/user.repository';
 import { ListBuilder, ListInterface } from '../common/list';
 
 /**
