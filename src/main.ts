@@ -7,8 +7,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Bridge')
-    .setDescription('Bridge API Documentation')
+    .setTitle('Template')
+    .setDescription('Template API Documentation')
     .setVersion('1.0')
     .addBearerAuth(
       {
