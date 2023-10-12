@@ -8,6 +8,10 @@ updates:
       nest-dependencies:
         patterns:
           - "@nestjs/*"
+          - "express"
+      eslint:
+        patterns:
+          - "*eslint*"      
          
 
   # You can specify more updates for other package ecosystems
