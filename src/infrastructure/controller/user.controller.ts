@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Get,
   HttpStatus,
@@ -8,6 +9,7 @@ import {
   Post,
   Req,
   Res,
+  UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
 import {
@@ -16,6 +18,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { instanceToPlain } from 'class-transformer';
 import { Response, Request } from 'express';
 
 import { UserCreateRequestDto } from '../../application/dto/user/user-create-request.dto';
@@ -46,7 +49,7 @@ export class UserController {
 
       return res.status(HttpStatus.OK).json({
         statusCode: HttpStatus.OK,
-        data: user,
+        data: instanceToPlain(user),
       });
     } catch (error) {
       return res.status(HttpStatus.BAD_REQUEST).json({
@@ -69,7 +72,7 @@ export class UserController {
 
       return res.status(HttpStatus.OK).json({
         statusCode: HttpStatus.OK,
-        ...users,
+        ...instanceToPlain(users),
       });
     } catch (error) {
       return res.status(HttpStatus.BAD_REQUEST).json({
@@ -95,7 +98,7 @@ export class UserController {
 
       return res.status(HttpStatus.CREATED).json({
         statusCode: HttpStatus.CREATED,
-        data: user,
+        data: instanceToPlain(user),
       });
     } catch (error) {
       return res.status(HttpStatus.BAD_REQUEST).json({
