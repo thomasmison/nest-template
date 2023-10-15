@@ -4,7 +4,7 @@ import * as request from 'supertest';
 
 import { AppModule } from '../../src/app.module';
 
-describe('AppController (e2e)', () => {
+describe('UserController (e2e)', () => {
   let app: INestApplication;
   let userToken: string;
 
@@ -36,6 +36,22 @@ describe('AppController (e2e)', () => {
       .set('Authorization', `Bearer ${userToken}`)
       .expect(200)
       .expect(new RegExp(/"statusCode":200,"data":\[.*]/)));
+
+  it('/user (POST)', async () => {
+    const user = {
+      username: 'test',
+      email: 'test@test.com',
+      name: 'test',
+    };
+    const response = await request(app.getHttpServer())
+      .post('/user')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send(user)
+      .expect(201)
+      .expect(new RegExp(/"statusCode":201,"data":{.*}/));
+
+    expect(response.body.data.username).toBe(user.username);
+  });
 
   afterAll(async () => {
     await app.close();
