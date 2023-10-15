@@ -45,8 +45,9 @@ export class UserAppService {
     user.name = userCreateDto.name;
     user.email = userCreateDto.email;
     user.username = userCreateDto.username;
+    user.password = userCreateDto.password;
     // it's an example of using domain service, but very useless in this case.
 
-    return this.userRepository.create(user);
+    return this.userRepository.save(user);
   }
 }
