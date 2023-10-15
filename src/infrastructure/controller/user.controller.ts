@@ -1,6 +1,5 @@
 import {
   Body,
-  ClassSerializerInterceptor,
   Controller,
   Get,
   HttpStatus,
@@ -9,7 +8,6 @@ import {
   Post,
   Req,
   Res,
-  UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
 import {
