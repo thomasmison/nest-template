@@ -29,4 +29,16 @@ export class UserRepository extends Repository<User> {
     }
     return user;
   }
+
+  async getOneByUsername(username: string): Promise<User> {
+    const user = await this.findOneBy({ username });
+
+    if (!user) {
+      throw new UserNotFoundException(
+        `User with username ${username} not found`,
+      );
+    }
+
+    return user;
+  }
 }

@@ -1603,6 +1603,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/validator@npm:^13.7.10":
+  version: 13.11.3
+  resolution: "@types/validator@npm:13.11.3"
+  checksum: 641c87d55d11664d83bac9201ca75ff0e1fd0cc6588145a6629e82a354827933afe351d0a37dcd641b979a27794fe1666f1f74699cda3dc3f02f17c6005f951c
+  languageName: node
+  linkType: hard
+
 "@types/yargs-parser@npm:*":
   version: 21.0.1
   resolution: "@types/yargs-parser@npm:21.0.1"
@@ -2743,10 +2750,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"class-transformer@npm:^0.5.0":
+"class-transformer@npm:^0.5.0, class-transformer@npm:^0.5.1":
   version: 0.5.1
   resolution: "class-transformer@npm:0.5.1"
   checksum: f191c8b4cc4239990f5efdd790cabdd852c243ed66248e39f6616a349c910c6eed2d9fd1fbf7ee6ea89f69b4f1d0b493b27347fe0cd0ae26b47c3745a805b6d3
+  languageName: node
+  linkType: hard
+
+"class-validator@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "class-validator@npm:0.14.0"
+  dependencies:
+    "@types/validator": ^13.7.10
+    libphonenumber-js: ^1.10.14
+    validator: ^13.7.0
+  checksum: f62e4a0ad24cee68f4b2bc70d32b96de90cb598f96bde362b4dbf4234151af8eb6ae225458312a38fc49fa3959844cf61c60e731a8205e9a570454cff8de2710
   languageName: node
   linkType: hard
 
@@ -5813,6 +5831,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"libphonenumber-js@npm:^1.10.14":
+  version: 1.10.47
+  resolution: "libphonenumber-js@npm:1.10.47"
+  checksum: 04fd0a4e57fdcb5c3a566fb26ded46c36e17953559c4a34d2f2b42299228e424109a56aa9588f4d7020bf3dd500cf5010e622734eeeda45e478e5d36d31b113d
+  languageName: node
+  linkType: hard
+
 "lines-and-columns@npm:^1.1.6":
   version: 1.2.4
   resolution: "lines-and-columns@npm:1.2.4"
@@ -6358,6 +6383,8 @@ __metadata:
     "@types/supertest": ^2.0.14
     "@typescript-eslint/eslint-plugin": ^6.7.4
     "@typescript-eslint/parser": ^6.7.4
+    class-transformer: ^0.5.1
+    class-validator: ^0.14.0
     dotenv: ^16.3.1
     eslint: ^8.51.0
     eslint-config-prettier: ^9.0.0
@@ -8631,6 +8658,13 @@ __metadata:
     "@types/istanbul-lib-coverage": ^2.0.1
     convert-source-map: ^1.6.0
   checksum: 2069d59ee46cf8d83b4adfd8a5c1a90834caffa9f675e4360f1157ffc8578ef0f763c8f32d128334424159bb6b01f3876acd39cd13297b2769405a9da241f8d1
+  languageName: node
+  linkType: hard
+
+"validator@npm:^13.7.0":
+  version: 13.11.0
+  resolution: "validator@npm:13.11.0"
+  checksum: d1e0c27022681420756da25bc03eb08d5f0c66fb008f8ff02ebc95812b77c6be6e03d3bd05cf80ca702e23eeb73dadd66b4b3683173ea2a0bc7cc72820bee131
   languageName: node
   linkType: hard
 

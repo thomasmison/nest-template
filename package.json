@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest.config.ts",
-    "fixtures:load": "fixtures-ts-node-commonjs load ./fixtures -d ./src/infrastructure/app-data-source.ts --debug",
+    "fixtures:load": "fixtures-ts-node-commonjs load ./fixtures -d ./src/infrastructure/app-data-source.ts --ignoreDecorators --debug",
     "db:clear": "node -r ts-node/register ./src/scripts/clear-db.ts",
     "db:clear-load": "yarn db:clear && yarn fixtures:load"
   },
@@ -29,6 +29,8 @@
     "@nestjs/platform-express": "^10.2.7",
     "@nestjs/swagger": "^7.1.13",
     "@nestjs/typeorm": "^10.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
     "dotenv": "^16.3.1",
     "eslint-plugin-import": "^2.28.1",
     "express": "^4.18.2",
