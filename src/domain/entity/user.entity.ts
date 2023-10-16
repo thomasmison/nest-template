@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+import { AuthSession } from './auth-session.entity';
 
 @Entity()
 export class User {
@@ -25,4 +27,10 @@ export class User {
   // just an example of how to use Exclude decorator
   @Column('varchar', { length: 255 })
   password: string;
+
+  @Exclude()
+  @OneToMany(() => AuthSession, (authSession) => authSession.user, {
+    eager: false,
+  })
+  authSessions: AuthSession[];
 }
