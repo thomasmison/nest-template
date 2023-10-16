@@ -21,8 +21,8 @@ import { Response, Request } from 'express';
 
 import { UserCreateRequestDto } from '../../application/dto/user/user-create-request.dto';
 import { UserListResponseDto } from '../../application/dto/user/user-list-response.dto';
+import { UserResponseDto } from '../../application/dto/user/user-response.dto';
 import { UserAppService } from '../../application/service/user.app.service';
-import { User } from '../../domain/entity/user.entity';
 
 @ApiTags('user')
 @Controller('user')
@@ -32,7 +32,7 @@ export class UserController {
 
   @ApiOperation({ summary: 'Get User by id.' })
   @ApiResponse({
-    type: User,
+    type: UserResponseDto,
     status: HttpStatus.OK,
     description: 'User list.',
   })
@@ -82,7 +82,7 @@ export class UserController {
 
   @ApiOperation({ summary: 'Create an user.' })
   @ApiResponse({
-    type: User,
+    type: UserResponseDto,
     status: HttpStatus.CREATED,
   })
   @Post()

@@ -6,4 +6,7 @@ export class BaseResponseDto {
 
   @ApiProperty()
   message?: string;
+
+  @ApiProperty()
+  data?: unknown;
 }
