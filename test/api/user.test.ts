@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
@@ -44,10 +45,10 @@ describe('UserController (e2e)', () => {
 
   it('/user (POST)', async () => {
     const user = {
-      username: 'test',
-      email: 'test@test.com',
-      name: 'test',
-      password: 'test',
+      username: faker.internet.userName(),
+      email: faker.internet.email(),
+      name: faker.person.firstName(),
+      password: faker.internet.password(),
     };
     const response = await request(app.getHttpServer())
       .post('/user')
