@@ -17,12 +17,13 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest.config.ts",
+    "test:e2e": "jest --config ./test/jest.config.ts --detectOpenHandles",
     "fixtures:load": "fixtures-ts-node-commonjs load ./fixtures -d ./src/infrastructure/app-data-source.ts --ignoreDecorators --debug",
     "db:clear": "node -r ts-node/register ./src/scripts/clear-db.ts",
     "db:clear-load": "yarn db:clear && yarn fixtures:load"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.2.0",
     "@nestjs/common": "^10.2.7",
     "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.2.7",
