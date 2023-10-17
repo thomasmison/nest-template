@@ -3,6 +3,7 @@ import { Exclude } from 'class-transformer';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { AuthSession } from './auth-session.entity';
+import { Hash } from '../../infrastructure/common/hash.utils';
 
 @Entity()
 export class User {
@@ -23,8 +24,6 @@ export class User {
   username: string;
 
   @Exclude()
-  // ATM we are not using password hashing, but should be implemented when AuthService is implemented
-  // just an example of how to use Exclude decorator
   @Column('varchar', { length: 255 })
   password: string;
 
@@ -33,4 +32,9 @@ export class User {
     eager: false,
   })
   authSessions: AuthSession[];
+
+  // We should not use this method in production, we have to use auth service, only used by convenience when loading fixtures through TypeORM yml
+  private setPassword(password: string): void {
+    this.password = Hash.from(password).sha512();
+  }
 }
