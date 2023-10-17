@@ -1,13 +1,13 @@
 import 'dotenv/config';
-import { createHash } from 'crypto';
-
 import { Injectable } from '@nestjs/common';
 import jwt from 'jsonwebtoken';
 
 import { AuthSessionService } from './auth-session.service';
 import { User } from '../../domain/entity/user.entity';
+import { Hash } from '../../infrastructure/common/hash.utils';
 import { Time } from '../../infrastructure/common/time.utils';
 import { UserRepository } from '../../infrastructure/repository/user.repository';
+import { AuthTokenDto } from '../dto/auth/auth-token.dto';
 import { SignInRequestDto } from '../dto/auth/sign-in-request.dto';
 import { WrongPasswordException } from '../exception/auth/wrong-password.exception';
 
@@ -29,10 +29,7 @@ export class AuthService {
     this.jwtAlgorithm = 'HS512';
   }
 
-  async signIn(signInDto: SignInRequestDto): Promise<{
-    accessToken: string;
-    refreshToken: string;
-  }> {
+  async signIn(signInDto: SignInRequestDto): Promise<AuthTokenDto> {
     const user = await this.userRepository.getOneByEmail(signInDto.email);
 
     const hashedPassword = this.hashPassword(signInDto.password);
@@ -41,35 +38,31 @@ export class AuthService {
       throw new WrongPasswordException(`Wrong password`);
     }
 
-    return this.authenticateUser(user);
-  }
-
-  async refresh(refreshToken: string): Promise<{
-    accessToken: string;
-    refreshToken: string;
-  }> {
-    const authSession =
-      await this.authSessionService.getSessionByRefreshToken(refreshToken);
-
-    const user = await this.userRepository.getOneById(authSession.user.id);
-
-    return this.authenticateUser(user);
-  }
-
-  private async authenticateUser(user: User): Promise<{
-    accessToken: string;
-    refreshToken: string;
-  }> {
-    const accessToken = this.generateJwtToken(user);
-
     const authSession = await this.authSessionService.createAuthSession(
       user,
       Time.fromDays(7).minutes, // For the moment we set the refresh token to expire in 7 days, when we implement the keep me logged in feature we can change this
     );
 
     return {
-      accessToken,
+      accessToken: this.generateJwtToken(user),
       refreshToken: authSession.refreshToken,
+    };
+  }
+
+  async refresh(refreshToken: string): Promise<AuthTokenDto> {
+    const authSession =
+      await this.authSessionService.getSessionByRefreshToken(refreshToken);
+
+    const user = await this.userRepository.getOneById(authSession.user.id);
+
+    const newAuthSession = await this.authSessionService.refreshAuthSession(
+      authSession,
+      Time.fromDays(7).minutes, // For the moment we set the refresh token to expire in 7 days, when we implement the keep me logged in feature we can change this
+    );
+
+    return {
+      accessToken: this.generateJwtToken(user),
+      refreshToken: newAuthSession.refreshToken,
     };
   }
 
@@ -88,8 +81,6 @@ export class AuthService {
   }
 
   public hashPassword(password: string): string {
-    const hash = createHash('sha512');
-    hash.update(password);
-    return hash.digest('hex');
+    return Hash.from(password).sha512();
   }
 }
