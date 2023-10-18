@@ -8,6 +8,7 @@ import {
   Post,
   Req,
   Res,
+  UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import {
@@ -23,10 +24,12 @@ import { UserCreateRequestDto } from '../../application/dto/user/user-create-req
 import { UserListResponseDto } from '../../application/dto/user/user-list-response.dto';
 import { UserResponseDto } from '../../application/dto/user/user-response.dto';
 import { UserAppService } from '../../application/service/user.app.service';
+import { JwtAuthGuard } from '../decorator/auth/jwt-auth-guard.decorator';
 
 @ApiTags('user')
 @Controller('user')
 @ApiBearerAuth('JWT-auth')
+@UseGuards(JwtAuthGuard)
 export class UserController {
   constructor(private userAppService: UserAppService) {}
 

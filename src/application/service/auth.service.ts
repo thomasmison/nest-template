@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { Injectable } from '@nestjs/common';
-import jwt from 'jsonwebtoken';
+import { validateOrReject } from 'class-validator';
+import * as jwt from 'jsonwebtoken';
 
 import { AuthSessionService } from './auth-session.service';
 import { User } from '../../domain/entity/user.entity';
@@ -8,6 +9,7 @@ import { Hash } from '../../infrastructure/common/hash.utils';
 import { Time } from '../../infrastructure/common/time.utils';
 import { UserRepository } from '../../infrastructure/repository/user.repository';
 import { AuthTokenDto } from '../dto/auth/auth-token.dto';
+import { JwtClaimsDto } from '../dto/auth/jwt-claims.dto';
 import { SignInRequestDto } from '../dto/auth/sign-in-request.dto';
 import { WrongPasswordException } from '../exception/auth/wrong-password.exception';
 
@@ -15,7 +17,7 @@ import { WrongPasswordException } from '../exception/auth/wrong-password.excepti
 export class AuthService {
   private readonly jwtSecret: string;
   private readonly jwtExpiresIn: string;
-  private readonly jwtAlgorithm: string;
+  private readonly jwtAlgorithm: jwt.Algorithm;
   constructor(
     private readonly userRepository: UserRepository,
     private readonly authSessionService: AuthSessionService,
@@ -44,7 +46,7 @@ export class AuthService {
     );
 
     return {
-      accessToken: this.generateJwtToken(user),
+      accessToken: await this.generateJwtToken(user),
       refreshToken: authSession.refreshToken,
     };
   }
@@ -61,20 +63,15 @@ export class AuthService {
     );
 
     return {
-      accessToken: this.generateJwtToken(user),
+      accessToken: await this.generateJwtToken(user),
       refreshToken: newAuthSession.refreshToken,
     };
   }
 
-  private generateJwtToken(user: User): string {
-    const payload = {
-      // Here we can add more data to the payload, like roles, permissions, etc
-      // It can be useful to add a class to handle the payload
-      id: user.id,
-      email: user.email,
-    };
+  private async generateJwtToken(user: User): Promise<string> {
+    const claims = await this.generateJwtClaims(user);
 
-    return jwt.sign(payload, this.jwtSecret, {
+    return jwt.sign({ claims }, this.jwtSecret, {
       expiresIn: this.jwtExpiresIn,
       algorithm: this.jwtAlgorithm,
     });
@@ -82,5 +79,23 @@ export class AuthService {
 
   public hashPassword(password: string): string {
     return Hash.from(password).sha512();
+  }
+
+  public async generateJwtClaims(user: User): Promise<JwtClaimsDto> {
+    const claims = new JwtClaimsDto();
+    claims.userEmail = user.email;
+    claims.userId = user.id;
+
+    await validateOrReject(claims);
+    return claims;
+  }
+
+  public async decodeToken(token: string): Promise<JwtClaimsDto> {
+    const decodedToken = jwt.verify(token, this.jwtSecret) as jwt.JwtPayload;
+    const claimsDto = new JwtClaimsDto();
+    Object.assign(claimsDto, decodedToken.claims);
+
+    await validateOrReject(claimsDto);
+    return claimsDto;
   }
 }
