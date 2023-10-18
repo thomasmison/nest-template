@@ -1505,6 +1505,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jsonwebtoken@npm:^9.0.4":
+  version: 9.0.4
+  resolution: "@types/jsonwebtoken@npm:9.0.4"
+  dependencies:
+    "@types/node": "*"
+  checksum: 66323ca082008be98d1a1b2782e8c8895b9168bb4444362eaae56e4263728742b61c1b5c4d51276ee80eb592e4b339063425531168b529ca33fd0939cdb9eaa9
+  languageName: node
+  linkType: hard
+
 "@types/luxon@npm:^3.3.2":
   version: 3.3.2
   resolution: "@types/luxon@npm:3.3.2"
@@ -6505,6 +6514,7 @@ __metadata:
     "@nestjs/typeorm": ^10.0.0
     "@types/express": ^4.17.19
     "@types/jest": ^29.5.2
+    "@types/jsonwebtoken": ^9.0.4
     "@types/luxon": ^3.3.2
     "@types/node": ^20.8.5
     "@types/supertest": ^2.0.14

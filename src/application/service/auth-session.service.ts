@@ -63,8 +63,16 @@ export class AuthSessionService {
     return authSession.expiresAt < new Date();
   }
 
-  private generateRefreshToken(): string {
-    return Math.random().toString(36).substring(2);
+  private generateRefreshToken(length = 64): string {
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+
+    return Array.from({ length })
+      .map(() =>
+        characters.charAt(Math.floor(Math.random() * charactersLength)),
+      )
+      .join('');
   }
 
   private generateExpirationDate(minutesDuration: number): Date {
