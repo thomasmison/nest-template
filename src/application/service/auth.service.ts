@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { Injectable } from '@nestjs/common';
 import { validateOrReject } from 'class-validator';
 import * as jwt from 'jsonwebtoken';
