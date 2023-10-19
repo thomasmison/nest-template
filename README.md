@@ -48,7 +48,7 @@ Nest is [MIT licensed](LICENSE).
 - [ ] Add unit test
 - [x] Add swagger
 - [x] Add authentication process
-  - [ ] Add Role based authentication
+  - [x] Add Role based authentication
 - [x] Add CI using github actions
 - [x] Add Fixtures
 - [ ] Add Dockerfile

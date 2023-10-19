@@ -19,7 +19,6 @@ import { Roles } from '../decorator/auth/roles.decorator';
 
 @ApiTags('auth')
 @Controller('auth')
-@Roles('public')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
@@ -30,6 +29,7 @@ export class AuthController {
     description: 'Authentication tokens.',
   })
   @Post('sign-in')
+  @Roles('public')
   async signIn(
     @Req() req: Request,
     @Res() res: Response,
@@ -56,6 +56,7 @@ export class AuthController {
     status: HttpStatus.OK,
   })
   @Post('refresh')
+  @Roles('public')
   async refresh(
     @Req() req: Request,
     @Res() res: Response,
