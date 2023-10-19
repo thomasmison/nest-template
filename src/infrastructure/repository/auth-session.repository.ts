@@ -11,10 +11,10 @@ export class AuthSessionRepository extends Repository<AuthSession> {
   }
 
   async getOneByRefreshToken(refreshToken: string): Promise<AuthSession> {
-    const authSession = await this.findOne({
-      where: { refreshToken },
-      relations: { user: true },
-    });
+    const authSession = await this.createQueryBuilder('authSession')
+      .leftJoinAndSelect('authSession.user', 'user')
+      .where('authSession.refreshToken = :refreshToken', { refreshToken })
+      .getOne();
 
     if (!authSession) {
       throw new AuthSessionNotFoundException(

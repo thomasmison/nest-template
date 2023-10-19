@@ -4,6 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 
 import { AppModule } from '../../src/app.module';
+import { testConfig } from '../test-config';
 
 describe('UserController (e2e)', () => {
   let app: INestApplication;
@@ -17,11 +18,11 @@ describe('UserController (e2e)', () => {
     app = moduleFixture.createNestApplication();
     await app.init();
 
-    userToken = 'TODO: Set user token here.';
+    userToken = testConfig.jwtToken;
   });
 
   it('/user/{id}(GET)', async () => {
-    const userId = 'ca60cdee-eec4-4be1-be38-d9c481737781';
+    const userId = testConfig.userId;
     const response = await request(app.getHttpServer())
       .get(`/user/${userId}`)
       .set('Authorization', `Bearer ${userToken}`)
@@ -29,6 +30,17 @@ describe('UserController (e2e)', () => {
       .expect(new RegExp(/"statusCode":200,"data":{.*}/));
 
     expect(response.body.data.id).toBe(userId);
+    expect(response.body.data.password).toBeUndefined();
+  });
+
+  it('/user/me (GET)', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/user/me')
+      .set('Authorization', `Bearer ${userToken}`)
+      .expect(200)
+      .expect(new RegExp(/"statusCode":200,"data":{.*}/));
+
+    expect(response.body.data.id).toBe(testConfig.userId);
     expect(response.body.data.password).toBeUndefined();
   });
 

@@ -10,4 +10,5 @@ export default {
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
+  setupFilesAfterEnv: ['./jest.setup.ts'],
 };
