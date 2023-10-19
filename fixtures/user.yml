@@ -5,6 +5,8 @@ items:
     email: "john.doe@example.com"
     id: "ca60cdee-eec4-4be1-be38-d9c481737781"
     username: "john.doe"
+    roles:
+      - "USER"
     __call:
         setPassword:
             - "password"

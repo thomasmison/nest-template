@@ -24,13 +24,14 @@ import { UserCreateRequestDto } from '../../application/dto/user/user-create-req
 import { UserListResponseDto } from '../../application/dto/user/user-list-response.dto';
 import { UserResponseDto } from '../../application/dto/user/user-response.dto';
 import { UserAppService } from '../../application/service/user.app.service';
-import { JwtAuthGuard } from '../decorator/auth/jwt-auth-guard.decorator';
+import { RoleEnum } from '../../domain/enum/role.enum';
 import { CurrentUserId } from '../decorator/auth/jwt-claim.decorator';
+import { Roles } from '../decorator/auth/roles.decorator';
 
 @ApiTags('user')
 @Controller('user')
 @ApiBearerAuth('JWT-auth')
-@UseGuards(JwtAuthGuard)
+@Roles()
 export class UserController {
   constructor(private userAppService: UserAppService) {}
 
@@ -111,6 +112,7 @@ export class UserController {
     }
   }
 
+  @Roles([RoleEnum.Admin])
   @ApiOperation({ summary: 'Create an user.' })
   @ApiResponse({
     type: UserResponseDto,

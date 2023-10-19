@@ -15,9 +15,11 @@ import { AuthTokenResponseDto } from '../../application/dto/auth/auth-token-resp
 import { RefreshAuthRequestDto } from '../../application/dto/auth/refresh-auth-request.dto';
 import { SignInRequestDto } from '../../application/dto/auth/sign-in-request.dto';
 import { AuthService } from '../../application/service/auth.service';
+import { Roles } from '../decorator/auth/roles.decorator';
 
 @ApiTags('auth')
 @Controller('auth')
+@Roles('public')
 export class AuthController {
   constructor(private authService: AuthService) {}
 

@@ -9,6 +9,7 @@ import { testConfig } from '../test-config';
 describe('UserController (e2e)', () => {
   let app: INestApplication;
   let userToken: string;
+  let adminToken: string;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -18,7 +19,8 @@ describe('UserController (e2e)', () => {
     app = moduleFixture.createNestApplication();
     await app.init();
 
-    userToken = testConfig.jwtToken;
+    userToken = testConfig.userRoleToken;
+    adminToken = testConfig.adminRoleToken;
   });
 
   it('/user/{id}(GET)', async () => {
@@ -64,13 +66,38 @@ describe('UserController (e2e)', () => {
     };
     const response = await request(app.getHttpServer())
       .post('/user')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${adminToken}`)
       .send(user)
       .expect(201)
       .expect(new RegExp(/"statusCode":201,"data":{.*}/));
 
     expect(response.body.data.username).toBe(user.username);
     expect(response.body.data.password).toBeUndefined();
+  });
+
+  it('/user (POST) with wrong role token', async () => {
+    const user = {
+      username: faker.internet.userName(),
+      email: faker.internet.email(),
+      name: faker.person.firstName(),
+      password: faker.internet.password(),
+    };
+    const response = await request(app.getHttpServer())
+      .post('/user')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send(user)
+      .expect(403);
+
+    expect(response.body.statusCode).toBe(403);
+  });
+
+  it('/user/me (GET) with invalid token', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/user/me')
+      .set('Authorization', `Bearer ${userToken}invalid`)
+      .expect(401);
+
+    expect(response.body.statusCode).toBe(401);
   });
 
   afterAll(async () => {
