@@ -84,6 +84,7 @@ export class AuthService {
     const claims = new JwtClaimsDto();
     claims.userEmail = user.email;
     claims.userId = user.id;
+    claims.userRoles = user.roles;
 
     await validateOrReject(claims);
     return claims;

@@ -15,6 +15,7 @@ import { AuthTokenResponseDto } from '../../application/dto/auth/auth-token-resp
 import { RefreshAuthRequestDto } from '../../application/dto/auth/refresh-auth-request.dto';
 import { SignInRequestDto } from '../../application/dto/auth/sign-in-request.dto';
 import { AuthService } from '../../application/service/auth.service';
+import { Roles } from '../decorator/auth/roles.decorator';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -28,6 +29,7 @@ export class AuthController {
     description: 'Authentication tokens.',
   })
   @Post('sign-in')
+  @Roles('public')
   async signIn(
     @Req() req: Request,
     @Res() res: Response,
@@ -54,6 +56,7 @@ export class AuthController {
     status: HttpStatus.OK,
   })
   @Post('refresh')
+  @Roles('public')
   async refresh(
     @Req() req: Request,
     @Res() res: Response,

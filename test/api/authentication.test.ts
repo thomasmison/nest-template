@@ -5,7 +5,7 @@ import * as request from 'supertest';
 import { AppModule } from '../../src/app.module';
 import { testConfig } from '../test-config';
 
-describe('UserController (e2e)', () => {
+describe('AuthController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
