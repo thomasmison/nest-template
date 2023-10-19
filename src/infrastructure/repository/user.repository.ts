@@ -11,11 +11,14 @@ export class UserRepository extends Repository<User> {
   }
 
   async getAll(): Promise<User[]> {
-    return await this.find();
+    return await this.createQueryBuilder('user').getMany();
   }
 
   async getOneByEmail(email: string): Promise<User> {
-    const user = await this.findOneBy({ email });
+    const user = await this.createQueryBuilder('user')
+      .where('user.email = :email', { email })
+      .getOne();
+
     if (!user) {
       throw new UserNotFoundException(`User with email ${email} not found`);
     }
@@ -23,15 +26,21 @@ export class UserRepository extends Repository<User> {
   }
 
   async getOneById(id: string): Promise<User> {
-    const user = await this.findOneBy({ id });
+    const user = await this.createQueryBuilder('user')
+      .where('user.id = :id', { id })
+      .getOne();
+
     if (!user) {
       throw new UserNotFoundException(`User with id ${id} not found`);
     }
+
     return user;
   }
 
   async getOneByUsername(username: string): Promise<User> {
-    const user = await this.findOneBy({ username });
+    const user = await this.createQueryBuilder('user')
+      .where('user.username = :username', { username })
+      .getOne();
 
     if (!user) {
       throw new UserNotFoundException(
