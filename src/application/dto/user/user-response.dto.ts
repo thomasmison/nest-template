@@ -4,6 +4,6 @@ import { User } from '../../../domain/entity/user.entity';
 import { BaseResponseDto } from '../common/base.response.dto';
 
 export class UserResponseDto extends BaseResponseDto {
-  @ApiProperty()
+  @ApiProperty({ type: User })
   data: User;
 }
