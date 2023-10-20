@@ -13,6 +13,7 @@ import { UserController } from './infrastructure/controller/user.controller';
 import { RolesGuard } from './infrastructure/decorator/auth/jwt-auth-guard.decorator';
 import { AuthSessionRepository } from './infrastructure/repository/auth-session.repository';
 import { UserRepository } from './infrastructure/repository/user.repository';
+import { StorageService } from './infrastructure/service/storage.service';
 
 @Module({
   imports: [TypeOrmModule.forRoot(appDataSource.options)],
@@ -22,6 +23,7 @@ import { UserRepository } from './infrastructure/repository/user.repository';
       provide: APP_GUARD,
       useClass: RolesGuard,
     },
+    StorageService,
     AuthSessionRepository,
     UserRepository,
     UserService,
