@@ -11,9 +11,9 @@ items:
         setPassword:
             - "password"
 
-  generatedUser{1..20}:
+  generatedUser{1..10}:
     name: "{{person.firstName}} {{person.lastName}}"
-    email: "{{internet.email}}"
+    email: "mock_{{internet.email}}"
     username: "{{internet.userName}}"
     __call:
       setPassword:
