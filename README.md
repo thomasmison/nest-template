@@ -52,4 +52,4 @@ Nest is [MIT licensed](LICENSE).
 - [x] Add CI using github actions
 - [x] Add Fixtures
 - [ ] Add Dockerfile
-- [ ] Add Storage service
+- [x] Add Storage service
