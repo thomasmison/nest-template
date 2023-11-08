@@ -610,19 +610,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/s3-request-presigner@npm:^3.431.0":
-  version: 3.431.0
-  resolution: "@aws-sdk/s3-request-presigner@npm:3.431.0"
+"@aws-sdk/s3-request-presigner@npm:^3.445.0":
+  version: 3.445.0
+  resolution: "@aws-sdk/s3-request-presigner@npm:3.445.0"
   dependencies:
-    "@aws-sdk/signature-v4-multi-region": 3.428.0
-    "@aws-sdk/types": 3.428.0
-    "@aws-sdk/util-format-url": 3.428.0
-    "@smithy/middleware-endpoint": ^2.1.2
-    "@smithy/protocol-http": ^3.0.7
-    "@smithy/smithy-client": ^2.1.11
-    "@smithy/types": ^2.3.5
+    "@aws-sdk/signature-v4-multi-region": 3.437.0
+    "@aws-sdk/types": 3.433.0
+    "@aws-sdk/util-format-url": 3.433.0
+    "@smithy/middleware-endpoint": ^2.1.3
+    "@smithy/protocol-http": ^3.0.8
+    "@smithy/smithy-client": ^2.1.12
+    "@smithy/types": ^2.4.0
     tslib: ^2.5.0
-  checksum: b249e7d2eea120f88778636a89b1699b80dd1a355ebd129738068596b535376519e07a2ac312d9b16a68104801c470d8f9e38d85e2b250837a09f5fb0a41e2d8
+  checksum: 5574d61fd1781681f252677c6e06c74b1971ae2192e7274b3ac986b2ada12785335429e91cf958e68894ee0b039058bd51a76e92432d762a446997e0a25e060c
   languageName: node
   linkType: hard
 
@@ -636,6 +636,19 @@ __metadata:
     "@smithy/types": ^2.3.5
     tslib: ^2.5.0
   checksum: e8f11226e1fcf087d1733ae6eddaadc6ef07bf1267d9e8f4eafe7177dcecc5cb556470b336eac917497a35e74a9f895b017a3e859ea0250dd43ed744b9cad0b2
+  languageName: node
+  linkType: hard
+
+"@aws-sdk/signature-v4-multi-region@npm:3.437.0":
+  version: 3.437.0
+  resolution: "@aws-sdk/signature-v4-multi-region@npm:3.437.0"
+  dependencies:
+    "@aws-sdk/types": 3.433.0
+    "@smithy/protocol-http": ^3.0.8
+    "@smithy/signature-v4": ^2.0.0
+    "@smithy/types": ^2.4.0
+    tslib: ^2.5.0
+  checksum: 94a442ccaad2c58b5a05eb7573a49da3110c7836a4e56e3790a37c3a124981b625b1df79ec6f806e71d72e0e26347c4c1800136417c121ce3130bc573cd86c7a
   languageName: node
   linkType: hard
 
@@ -692,6 +705,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@aws-sdk/types@npm:3.433.0":
+  version: 3.433.0
+  resolution: "@aws-sdk/types@npm:3.433.0"
+  dependencies:
+    "@smithy/types": ^2.4.0
+    tslib: ^2.5.0
+  checksum: f7460897bee2835b06cd957853b17eb4eb4fe1e7f66f6ca97e2fc0c642ff7093011d73cbde64f097cdcc462f1f72c3e0980472c716eefd656c61dac95e7e060d
+  languageName: node
+  linkType: hard
+
 "@aws-sdk/util-arn-parser@npm:3.310.0":
   version: 3.310.0
   resolution: "@aws-sdk/util-arn-parser@npm:3.310.0"
@@ -731,15 +754,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/util-format-url@npm:3.428.0":
-  version: 3.428.0
-  resolution: "@aws-sdk/util-format-url@npm:3.428.0"
+"@aws-sdk/util-format-url@npm:3.433.0":
+  version: 3.433.0
+  resolution: "@aws-sdk/util-format-url@npm:3.433.0"
   dependencies:
-    "@aws-sdk/types": 3.428.0
-    "@smithy/querystring-builder": ^2.0.11
-    "@smithy/types": ^2.3.5
+    "@aws-sdk/types": 3.433.0
+    "@smithy/querystring-builder": ^2.0.12
+    "@smithy/types": ^2.4.0
     tslib: ^2.5.0
-  checksum: 618628008f3533f0b94d7e59cce51f9335a21396683da557dad7de4d71d233e39ebd00a64585244672307eeef4bc9837d3543d8525fb0420b237244ed9bc3329
+  checksum: 71e2646bfd85dcb4d12f6cd79a72aa0d09934ff388be61e54a7158756b18cd4fa2fae9c0454fee9b33f08b0575e6b33058c982f8b511da6d67f168b5dcfe67ca
   languageName: node
   linkType: hard
 
@@ -2177,7 +2200,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/middleware-endpoint@npm:^2.1.2":
+"@smithy/middleware-endpoint@npm:^2.1.2, @smithy/middleware-endpoint@npm:^2.1.3":
   version: 2.1.3
   resolution: "@smithy/middleware-endpoint@npm:2.1.3"
   dependencies:
@@ -2273,7 +2296,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@smithy/querystring-builder@npm:^2.0.11, @smithy/querystring-builder@npm:^2.0.12":
+"@smithy/querystring-builder@npm:^2.0.12":
   version: 2.0.12
   resolution: "@smithy/querystring-builder@npm:2.0.12"
   dependencies:
@@ -7753,7 +7776,7 @@ __metadata:
   resolution: "nest-template@workspace:."
   dependencies:
     "@aws-sdk/client-s3": ^3.431.0
-    "@aws-sdk/s3-request-presigner": ^3.431.0
+    "@aws-sdk/s3-request-presigner": ^3.445.0
     "@aws-sdk/util-base64-node": ^3.209.0
     "@faker-js/faker": ^8.2.0
     "@nestjs/cli": ^10.0.0
