@@ -2753,6 +2753,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/methods@npm:*":
+  version: 1.1.4
+  resolution: "@types/methods@npm:1.1.4"
+  checksum: ad2a7178486f2fd167750f3eb920ab032a947ff2e26f55c86670a6038632d790b46f52e5b6ead5823f1e53fc68028f1e9ddd15cfead7903e04517c88debd72b1
+  languageName: node
+  linkType: hard
+
 "@types/mime@npm:*":
   version: 3.0.2
   resolution: "@types/mime@npm:3.0.2"
@@ -2849,12 +2856,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/supertest@npm:^2.0.14":
-  version: 2.0.14
-  resolution: "@types/supertest@npm:2.0.14"
+"@types/supertest@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@types/supertest@npm:6.0.0"
   dependencies:
+    "@types/cookiejar": "*"
+    "@types/methods": "*"
     "@types/superagent": "*"
-  checksum: 9f6850a22b8f0fd4c26a6dfd9b64771a66476b1a4f841a3b84a9da843ce69463efbf37594fe107297dd14a225d199b802464d48d70e9413238c637903d392137
+  checksum: 696419d6d1fbb4638e063471d0ce8c2e6c68c2e09fce40713933fcdf8bfc5c0d803b287c7c5e8ec5ab58b6078e498ec34099ae6461dfd70b481832086dc0a1d8
   languageName: node
   linkType: hard
 
@@ -7770,7 +7779,7 @@ __metadata:
     "@types/jsonwebtoken": ^9.0.4
     "@types/luxon": ^3.3.2
     "@types/node": ^20.8.5
-    "@types/supertest": ^2.0.14
+    "@types/supertest": ^6.0.0
     "@typescript-eslint/eslint-plugin": ^6.7.5
     "@typescript-eslint/parser": ^6.7.5
     class-transformer: ^0.5.1
